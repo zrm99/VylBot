@@ -1,0 +1,16 @@
+{
+    "token": "",
+    "prefix": "v!",
+    "channels": {
+        "logging": "logs"
+    },
+    "roles": {
+        "moderator": "Moderator",
+        "admin": "Admin",
+        "muted": "Muted"
+    },
+    "assignableRoles": {
+        "notify": "Notify",
+        "poll": "VotePings"
+    }
+}
