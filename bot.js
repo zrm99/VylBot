@@ -4,6 +4,8 @@ const config = require('./config.json');
 
 client.once('ready', onReady);
 client.on('message', onMessage);
+client.on('messageDelete', onDelete);
+client.on('messageUpdate', onEdit);
 
 var prefix = config.prefix;
 
@@ -22,12 +24,13 @@ function onMessage(message) {
 
     var content = message.content;
 
-    if (content.substring(0, prefix.length) == prefix) {
+    if (content.substring(0, prefix.length).toLowerCase() == prefix.toLowerCase()) {
         var args = content.substring(prefix.length).split(" ");
 
         if (args[0] == "help") {
             var commands = "";
-
+            
+            commands += prefix + "about\n";
             commands += prefix + "ban <user> [reason]\n";
             commands += prefix + "help\n";
             commands += prefix + "kick <user> [reason]\n";
@@ -37,6 +40,16 @@ function onMessage(message) {
             commands += prefix + "unmute <user>\n";
             
             embed(message.channel, "Commands", colourGreen, commands);
+        }
+        
+        if (args[0] == "about") {
+        	var commands = "";
+        	
+        	commands += "Version: 1.1.1\n";
+        	commands += "Author: Vylpes\n";
+        	commands += "Date: 21-Mar-20\n";
+        	
+        	embed(message.channel, "About", colourGreen, commands);
         }
 
         if (args[0] == "roles") {
@@ -217,6 +230,19 @@ function onMessage(message) {
     }
 }
 
+function onDelete(message) {	
+	if(message.author.bot) return;
+	
+	embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Message Deleted", colourBlue, "Member: " + message.author.tag + "\nMessage: " + message.content + "\nChannel: " + message.channel);
+}
+
+function onEdit(oldMessage, newMessage) {
+	if (newMessage.author.bot) return;
+	if (oldMessage.content == newMessage.content) return;
+	
+	embed(newMessage.guild.channels.find(channel => channel.name == config.channels.logging), "Message Edited", colourBlue, "Member: " + newMessage.author.tag + "\nOld: " + oldMessage.content + "\nNew: " + newMessage.content + "\nChannel: " + newMessage.channel);
+}
+
 function embed(channel, title, colour, message) {
     var embed = new discord.RichEmbed()
         .setTitle(title)
@@ -226,4 +252,4 @@ function embed(channel, title, colour, message) {
     channel.send(embed);
 }
 
-client.login(config.token);
+client.login(config.tokens.live);
