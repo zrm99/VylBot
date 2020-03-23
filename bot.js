@@ -48,9 +48,9 @@ function onMessage(message) {
         if (args[0] == "about") {
         	var commands = "";
         	
-        	commands += "Version: 1.1.1\n";
+        	commands += "Version: 1.1.1 (+2)\n";
         	commands += "Author: Vylpes\n";
-        	commands += "Date: 21-Mar-20\n";
+        	commands += "Date: 23-Mar-20\n";
         	
         	embed(message.channel, "About", colourGreen, commands);
         }
