@@ -1,6 +1,12 @@
 {
-    "token": "",
-    "prefix": "v!",
+    "tokens": {
+      "live": "",
+      "dev": ""
+    },
+    "prefix": {
+    	"live": "v!",
+    	"dev": "d!"
+    },
     "channels": {
         "logging": "logs"
     },

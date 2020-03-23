@@ -7,7 +7,10 @@ client.on('message', onMessage);
 client.on('messageDelete', onDelete);
 client.on('messageUpdate', onEdit);
 
-var prefix = config.prefix;
+const devbuild = true;
+
+var prefix = config.prefix.live;
+if (devbuild) prefix = config.prefix.dev;
 
 var colourRed = 0xe02702;
 var colourPurple = 0x7200b5;
@@ -252,4 +255,8 @@ function embed(channel, title, colour, message) {
     channel.send(embed);
 }
 
-client.login(config.tokens.live);
+if (devbuild) {
+	client.login(config.tokens.dev);
+} else {
+	client.login(config.tokens.live);
+}
