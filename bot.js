@@ -13,10 +13,8 @@ const devbuild = true;
 var prefix = config.prefix.live;
 if (devbuild) prefix = config.prefix.dev;
 
-var colourRed = 0xe02702;
-var colourPurple = 0x7200b5;
-var colourBlue = 0x0754c6;
-var colourGreen = 0x0ac97c;
+var colourInfo = config.messageColours.info;
+var colourWarn = config.messageColours.Warn;
 
 function onReady() {
     client.user.setActivity("");
@@ -43,17 +41,17 @@ function onMessage(message) {
             commands += prefix + "roles\n";
             commands += prefix + "unmute <user>\n";
             
-            functions.embed(message.channel, "Commands", colourGreen, commands);
+            functions.embed(message.channel, "Commands", colourInfo, commands);
         }
         
         if (args[0] == "about") {
         	var commands = "";
         	
-        	commands += "Version: 1.1.2b2\n";
+        	commands += "Version: 1.1.2b3\n";
         	commands += "Author: Vylpes\n";
         	commands += "Date: 23-Mar-20\n";
         	
-        	functions.embed(message.channel, "About", colourGreen, commands);
+        	functions.embed(message.channel, "About", colourInfo, commands);
         }
 
         if (args[0] == "roles") {
@@ -62,7 +60,7 @@ function onMessage(message) {
             roles += config.assignableRoles.notify + "\n";
             roles += config.assignableRoles.poll + "\n";
 
-            functions.embed(message.channel, "Roles", colourGreen, roles);
+            functions.embed(message.channel, "Roles", colourInfo, roles);
         }
 
         if (args[0] == "role") {
@@ -71,13 +69,13 @@ function onMessage(message) {
 
                 if (message.member.roles.find(role => role.name == config.assignableRoles.notify)) {
                     message.member.removeRole(role).then(() => {
-                        functions.embed(message.channel, "", colourGreen, "Removed the notify role");
+                        functions.embed(message.channel, "", colourInfo, "Removed the notify role");
                     }).catch(err => {
                         console.log(err);
                     });
                 } else {
                     message.member.addRole(role).then(() => {
-                        functions.embed(message.channel, "", colourGreen, "Given the notify role"); 
+                        functions.embed(message.channel, "", colourInfo, "Given the notify role"); 
                     }).catch(err => {
                         console.log(err);
                     });
@@ -87,19 +85,19 @@ function onMessage(message) {
 
                 if (message.member.roles.find(role => role.name == config.assignableRoles.poll)) {
                     message.member.removeRole(role).then(() => {
-                        functions.embed(message.channel, "", colourGreen, "Removed the vote pings role");
+                        functions.embed(message.channel, "", colourInfo, "Removed the vote pings role");
                     }).catch(err => {
                         console.log(err);
                     });
                 } else {
                     message.member.addRole(role).then(() => {
-                        functions.embed(message.channel, "", colourGreen, "Given the vote pings role"); 
+                        functions.embed(message.channel, "", colourInfo, "Given the vote pings role"); 
                     }).catch(err => {
                         console.log(err);
                     });
                 }
             } else {
-                functions.embed(message.channel, "", colourRed, "This role doesn't exist, you can view assignable roles with " + prefix + "roles");
+                functions.embed(message.channel, "", colourWarn, "This role doesn't exist, you can view assignable roles with " + prefix + "roles");
             }
         }
 
@@ -117,20 +115,20 @@ function onMessage(message) {
                         var reason = argsReason.join(" ");
 
                         member.kick(reason).then(() => {
-                            functions.embed(message.channel, "", colourPurple, user.tag + " has been kicked");
-                            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Kicked", colourRed, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+                            functions.embed(message.channel, "", colourInfo, user.tag + " has been kicked");
+                            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Kicked", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
                         }).catch(err => {
                             message.reply("I was unable to kick the member");
                             console.log(err);
                         });
                     } else {
-                        functions.embed(message.channel, "", colourRed, "This user is not in the server");
+                        functions.embed(message.channel, "", colourWarn, "This user is not in the server");
                     }
                 } else {
-                    functions.embed(message.channel, "", colourRed, "Please specify a user by mentioning them");
+                    functions.embed(message.channel, "", colourWarn, "Please specify a user by mentioning them");
                 }
             } else {
-                functions.embed(message.channel, "", colourRed, "You do not have permission to run this command");
+                functions.embed(message.channel, "", colourWarn, "You do not have permission to run this command");
             }
 
             message.delete();
@@ -150,20 +148,20 @@ function onMessage(message) {
                         var reason = argsReason.join(" ");
 
                         member.ban(reason).then(() => {
-                            functions.embed(message.channel, "", colourPurple, user.tag + " has been banned");
-                            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Banned", colourRed, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+                            functions.embed(message.channel, "", colourInfo, user.tag + " has been banned");
+                            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Banned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
                         }).catch(err => {
                             message.reply("I was unable to ban the member");
                             console.log(err);
                         });
                     } else {
-                        functions.embed(message.channel, "", colourRed, "This user is not in the server");
+                        functions.embed(message.channel, "", colourWarn, "This user is not in the server");
                     }
                 } else {
-                    functions.embed(message.channel, "", colourRed, "Please specify a user by mentioning them");
+                    functions.embed(message.channel, "", colourWarn, "Please specify a user by mentioning them");
                 }
             } else {
-                functions.embed(message.channel, "", colourRed, "You do not have permission to run this command");
+                functions.embed(message.channel, "", colourWarn, "You do not have permission to run this command");
             }
 
             message.delete();
@@ -185,19 +183,19 @@ function onMessage(message) {
                         var mutedRole = message.guild.roles.find(role => role.name == config.roles.muted);
                         
                         member.addRole(mutedRole).then(() => {
-                            functions.embed(message.channel, "", colourPurple, user.tag + " has been muted");
-                            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Muted", colourRed, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag)
+                            functions.embed(message.channel, "", colourInfo, user.tag + " has been muted");
+                            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Muted", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag)
                         }).catch(err => {
                             console.log(err);
                         });
                     } else {
-                        functions.embed(message.channel, "", colourRed, "This user is not in the server");
+                        functions.embed(message.channel, "", colourWarn, "This user is not in the server");
                     }
                 } else {
-                    functions.embed(message.channel, "", colourRed, "Please specify a user by mentioning them");
+                    functions.embed(message.channel, "", colourWarn, "Please specify a user by mentioning them");
                 }
             } else {
-                functions.embed(message.channel, "", colourRed, "You do not have permssion to run this command");
+                functions.embed(message.channel, "", colourWarn, "You do not have permssion to run this command");
             }
 
             message.delete();
@@ -214,19 +212,19 @@ function onMessage(message) {
                         var mutedRole = message.guild.roles.find(role => role.name == config.roles.muted);
                         
                         member.removeRole(mutedRole).then(() => {
-                            functions.embed(message.channel, "", colourPurple, user.tag + " has been unmuted");
-                            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Unmuted", colourBlue, "Member: " + user.tag + "\n Moderator: " + message.author.tag)
+                            functions.embed(message.channel, "", colourInfo, user.tag + " has been unmuted");
+                            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Unmuted", colourInfo, "Member: " + user.tag + "\n Moderator: " + message.author.tag)
                         }).catch(err => {
                             console.log(err);
                         });
                     } else {
-                        functions.embed(message.channel, "", colourRed, "This user is not in the server");
+                        functions.embed(message.channel, "", colourWarn, "This user is not in the server");
                     }
                 } else {
-                    functions.embed(message.channel, "", colourRed, "Please specify a user by mentioning them");
+                    functions.embed(message.channel, "", colourWarn, "Please specify a user by mentioning them");
                 }
             } else {
-                functions.embed(message.channel, "", colourRed, "You do not have permission to run this command");
+                functions.embed(message.channel, "", colourWarn, "You do not have permission to run this command");
             }
 
             message.delete();
@@ -237,14 +235,14 @@ function onMessage(message) {
 function onDelete(message) {	
 	if(message.author.bot) return;
 	
-	functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Message Deleted", colourBlue, "Member: " + message.author.tag + "\nMessage: " + message.content + "\nChannel: " + message.channel);
+	functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Message Deleted", colourInfo, "Member: " + message.author.tag + "\nMessage: " + message.content + "\nChannel: " + message.channel);
 }
 
 function onEdit(oldMessage, newMessage) {
 	if (newMessage.author.bot) return;
 	if (oldMessage.content == newMessage.content) return;
 	
-	functions.embed(newMessage.guild.channels.find(channel => channel.name == config.channels.logging), "Message Edited", colourBlue, "Member: " + newMessage.author.tag + "\nOld: " + oldMessage.content + "\nNew: " + newMessage.content + "\nChannel: " + newMessage.channel);
+	functions.embed(newMessage.guild.channels.find(channel => channel.name == config.channels.logging), "Message Edited", colourInfo, "Member: " + newMessage.author.tag + "\nOld: " + oldMessage.content + "\nNew: " + newMessage.content + "\nChannel: " + newMessage.channel);
 }
 
 if (devbuild) {
