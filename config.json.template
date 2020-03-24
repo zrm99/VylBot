@@ -3,6 +3,11 @@
       "live": "",
       "dev": ""
     },
+    "info": {
+    	"version": "",
+    	"author": "",
+    	"date": ""
+    },
     "prefix": {
     	"live": "v!",
     	"dev": "d!"
