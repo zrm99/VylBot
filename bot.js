@@ -4,7 +4,7 @@ const client = new discord.Client();
 const config = require('./config.json');
 const functions = require('./functions.js');
 
-const devBuild = true;
+const devBuild = config.info.devBuild;
 
 var prefix = config.prefix.live;
 if (devBuild) prefix = config.prefix.dev;

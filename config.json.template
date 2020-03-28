@@ -6,7 +6,8 @@
     "info": {
     	"version": "",
     	"author": "",
-    	"date": ""
+    	"date": "",
+    	"devBuild": false
     },
     "prefix": {
     	"live": "v!",
