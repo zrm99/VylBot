@@ -26,8 +26,16 @@ client.on('message', (message) => {
 		
 		fs.stat(`./commands/${args[0]}.js`, function(err, stat) {
 			if (err == null) {
-				var commandFile = require(`./commands/${args[0]}.js`);
-				commandFile['run'](message, prefix, args);
+				try {
+					var commandFile = require(`./commands/${args[0]}`);
+					commandFile['run'](message, prefix, args);
+				} catch(err) {
+					console.log(`ERROR: Couldn't find command file.`);
+					console.log(`${message.content}`);
+					console.log(err);
+					
+					functions.embed(message.channel, "", colourWarn, "There was an error finding the command file. Please content the bot owner");
+				}
 			} else if (err.code === 'ENOENT') {
 				functions.embed(message.channel, "", colourWarn, "Command does not exist");
 			}
