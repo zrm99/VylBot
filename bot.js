@@ -34,10 +34,14 @@ client.on('message', (message) => {
 					console.log(`${message.content}`);
 					console.log(err);
 					
-					functions.embed(message.channel, "", colourWarn, "There was an error finding the command file. Please content the bot owner");
+					functions.embed(message.channel, "", colourWarn, "There was an error finding the command file. Please contact the bot owner");
 				}
 			} else if (err.code === 'ENOENT') {
 				functions.embed(message.channel, "", colourWarn, "Command does not exist");
+			} else {
+				console.log(err);
+				
+				functions.embed(message.channel, "", colourWarn, "An unexpected error has occured. Please contact the bot owner");
 			}
 		});
 	}
