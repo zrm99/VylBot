@@ -1,12 +1,10 @@
 const config = require('../config.json');
 const functions = require('../functions.js');
 
-var colourInfo = config.messageColours.info;
-var colourWarn = config.messageColours.warn;module.exports = {
-	run: function(message, prefix, args) { run(message, prefix, args); }
-}
+var colourInfo = config.messageColours.info
+var colourWarn = config.messageColours.warn;
 
-function run(message, prefix, args) {
+exports.run = function(message, prefix, args) {
 	if (args[1] == config.assignableRoles.notify) {
 	    var role = message.guild.roles.find(role => role.name == config.assignableRoles.notify);
 	

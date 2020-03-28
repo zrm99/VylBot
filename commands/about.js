@@ -4,11 +4,7 @@ const functions = require('../functions.js');
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
 
-module.exports = {
-	run: function(message, prefix, args) { run(message, prefix, args); }
-}
-
-function run(message, prefix, args) {
+exports.run = function(message, prefix, args) {
 	var commands = "";
 	
 	commands += "Version: " + config.info.version + "\n";

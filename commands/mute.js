@@ -4,11 +4,7 @@ const functions = require('../functions.js');
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
 
-module.exports = {
-	run: function(message, prefix, args) { run(message, prefix, args); }
-}
-
-function run(message, prefix, args) {
+exports.run = function(message, prefix, args) {
 	if (message.member.roles.find(role => role.name == config.roles.moderator)) {
 	    var user = message.mentions.users.first();
 	
