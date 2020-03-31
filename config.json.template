@@ -1,6 +1,18 @@
 {
-    "token": "",
-    "prefix": "v!",
+    "tokens": {
+      "live": "",
+      "dev": ""
+    },
+    "info": {
+    	"version": "",
+    	"author": "",
+    	"date": "",
+    	"devBuild": false
+    },
+    "prefix": {
+    	"live": "v!",
+    	"dev": "d!"
+    },
     "channels": {
         "logging": "logs"
     },
@@ -12,5 +24,9 @@
     "assignableRoles": {
         "notify": "Notify",
         "poll": "VotePings"
+    },
+    "messageColours": {
+    	"info": "0x0754c6",
+    	"warn": "0xe02702"
     }
 }
