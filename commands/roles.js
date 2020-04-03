@@ -7,8 +7,9 @@ var colourWarn = config.messageColours.warn;
 exports.run = function(message, prefix, args) {
 	var roles = "";
 	
-	roles += config.assignableRoles.notify + "\n";
-	roles += config.assignableRoles.poll + "\n";
+	for (let i = 0; i < config.assignableRoles.length; i++) {
+		roles += `${config.assignableRoles[i]}\n`;
+	}
 	
 	functions.embed(message.channel, "Roles", colourInfo, roles);
 }
