@@ -5,39 +5,34 @@ var colourInfo = config.messageColours.info
 var colourWarn = config.messageColours.warn;
 
 exports.run = function(message, prefix, args) {
-	if (args[1] == config.assignableRoles.notify) {
-	    var role = message.guild.roles.find(role => role.name == config.assignableRoles.notify);
+	var roles = config.assignableRoles;
+	var requestedRole = "";
 	
-	    if (message.member.roles.find(role => role.name == config.assignableRoles.notify)) {
-	        message.member.removeRole(role).then(() => {
-	            functions.embed(message.channel, "", colourInfo, "Removed the notify role");
-	        }).catch(err => {
-	            console.log(err);
-	        });
-	    } else {
-	        message.member.addRole(role).then(() => {
-	            functions.embed(message.channel, "", colourInfo, "Given the notify role"); 
-	        }).catch(err => {
-	            console.log(err);
-	        });
-	    }
-	} else if (args[1] == config.assignableRoles.poll) {
-	    var role = message.guild.roles.find(role => role.name == config.assignableRoles.poll);
+	for (let i = 0; i < roles.length; i++) {
+		if (roles[i].toLowerCase() == args[1].toLowerCase()) {
+			requestedRole = roles[i];
+		}
+	}
 	
-	    if (message.member.roles.find(role => role.name == config.assignableRoles.poll)) {
-	        message.member.removeRole(role).then(() => {
-	            functions.embed(message.channel, "", colourInfo, "Removed the vote pings role");
-	        }).catch(err => {
-	            console.log(err);
-	        });
-	    } else {
-	        message.member.addRole(role).then(() => {
-	            functions.embed(message.channel, "", colourInfo, "Given the vote pings role"); 
-	        }).catch(err => {
-	            console.log(err);
-	        });
-	    }
+	if (requestedRole != "") {
+		var role = message.guild.roles.find(r => r.name == requestedRole);
+		
+		if (message.member.roles.find(r => r.name == requestedRole)) {
+			message.member.removeRole(role).then(() => {
+				functions.embed(message.channel, "", colourInfo, `Removed role: ${requestedRole}`);
+			}).catch(err => {
+				console.log(err);
+				functions.embed(message.channel, "", colourWarn, "An error occured. Please contact the bot owner");
+			});
+		} else {
+			message.member.addRole(role).then(() => {
+				functions.embed(message.channel, "", colourInfo, `Gave role: ${requestedRole}`);
+			}).catch(err => {
+				console.log(err);
+				functions.embed(message.channel, "", colourWarn, "An error occured. Please contact the bot owner");
+			});
+		}
 	} else {
-	    functions.embed(message.channel, "", colourWarn, "This role doesn't exist, you can view assignable roles with " + prefix + "roles");
+		functions.embed(message.channel, "", colourInfo, "This role does not exist, see assignable roles with the roles command");
 	}
 }
