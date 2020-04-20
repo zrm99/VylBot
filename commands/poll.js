@@ -1,6 +1,5 @@
 const config = require('../config.json');
 const functions = require('../functions.js');
-const fs = require('fs');
 
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
