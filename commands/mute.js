@@ -20,6 +20,7 @@ exports.run = function(message, prefix, args) {
 	            var mutedRole = message.guild.roles.find(role => role.name == config.roles.muted);
 				
 	            member.addRole(mutedRole).then(() => {
+			user.sendMessage(user,"You have been muted for the reason:" + reason);
 	                functions.embed(message.channel, "", colourInfo, user.tag + " has been muted");
 	                functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Muted", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag)
 	            }).catch(err => {
