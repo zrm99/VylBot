@@ -3,6 +3,18 @@
       "live": "",
       "dev": ""
     },
+    "commands":{
+        "sendMessageIfOff": true
+        
+        "about": true
+        "ban": true
+        "help": true
+        "kick": true
+        "mute": true
+        "role": true
+        "roles": true
+        "unmute": true
+    },
     "info": {
     	"version": "",
     	"author": "",
