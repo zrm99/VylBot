@@ -18,6 +18,7 @@ exports.run = function(message, prefix, args) {
 	            var reason = argsReason.join(" ");
 	
 	            member.ban(reason).then(() => {
+			user.sendMessage(user,"You have been baned from **" + guild.name + "** for the reason:" + reason);
 	                functions.embed(message.channel, "", colourInfo, user.tag + " has been banned");
 	                functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Banned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
 	            }).catch(err => {
