@@ -18,7 +18,8 @@ exports.run = function(message, prefix, args) {
 	                functions.embed(message.channel, "", colourInfo, user.tag + " has been unmuted");
 	                functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Unmuted", colourInfo, "Member: " + user.tag + "\n Moderator: " + message.author.tag)
 	            }).catch(err => {
-	                console.log(err);
+					functions.embed(message.channel, "", colourWarn, "There was an error unmuting this user, maybe I'm missing permissions?");
+					console.log(err);
 	            });
 	        } else {
 	            functions.embed(message.channel, "", colourWarn, "This user is not in the server");

@@ -21,8 +21,8 @@ exports.run = function(message, prefix, args) {
 	                functions.embed(message.channel, "", colourInfo, user.tag + " has been kicked");
 	                functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Kicked", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
 	            }).catch(err => {
-	                message.reply("I was unable to kick the member");
-	                console.log(err);
+					functions.embed(message.channel, "", colourWarn, "There was an error kicking this user, maybe I'm missing permissions?");
+					console.log(err);
 	            });
 	        } else {
 	            functions.embed(message.channel, "", colourWarn, "This user is not in the server");

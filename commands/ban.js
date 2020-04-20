@@ -21,8 +21,8 @@ exports.run = function(message, prefix, args) {
 	                functions.embed(message.channel, "", colourInfo, user.tag + " has been banned");
 	                functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Banned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
 	            }).catch(err => {
-	                message.reply("I was unable to ban the member");
-	                console.log(err);
+					functions.embed(message.channel, "", colourWarn, "There was an error banning this user, maybe I'm missing permissions?");
+					console.log(err);
 	            });
 	        } else {
 	            functions.embed(message.channel, "", colourWarn, "This user is not in the server");
