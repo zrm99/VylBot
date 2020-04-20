@@ -15,6 +15,7 @@
     },
     "channels": {
         "logging": "logs"
+        "polles":   "poll"
     },
     "roles": {
         "moderator": "Moderator",
