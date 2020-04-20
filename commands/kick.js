@@ -18,6 +18,7 @@ exports.run = function(message, prefix, args) {
 	            var reason = argsReason.join(" ");
 	
 	            member.kick(reason).then(() => {
+			user.sendMessage(user,"You have been kicked from **" + guild.name + "** for the reason:" + reason);
 	                functions.embed(message.channel, "", colourInfo, user.tag + " has been kicked");
 	                functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Kicked", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
 	            }).catch(err => {
