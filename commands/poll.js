@@ -7,9 +7,9 @@ var colourWarn = config.messageColours.warn;
 exports.run = function(message, prefix, args) {
     //checks if anyone was that dumb and tried to make a poll in a none poll channel... Idiots...
     if(message.channel.name = config.channels.poll){
-        var Poll
-        //checks for length
-        if(args.length === 3){
+    var Poll
+    //checks for length
+    if(args.length === 3){
     //checks for permissions because thats how it works right?
     if (message.member.roles.find(role => role.name == config.roles.moderator)) {
         //putting the options into a var to use later
