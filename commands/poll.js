@@ -32,7 +32,7 @@ exports.run = function(message, prefix, args) {
         //sending the: "no permissions" message
         functions.embed(message.channel, "", colourWarn, "You do not have permission to run this command");
      }
-   }if(args.length === 0){
+   }if(args.length === 1){
      if(args[0] == "end"){
              //deleting the sender message for the reaction collection thing...
              message.delete();
