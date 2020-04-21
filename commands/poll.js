@@ -17,8 +17,9 @@ exports.run = function(message, prefix, args) {
         var option_two = args[1];
         //putting the title into a var with a fancy loop
         var temp = 2;
+        var title
         for(temp < args.length){
-        var title = title + args[i] + " "
+        title = title + args[temp] + " "
         }
         //actully sending the message
         functions.embed(config.poll,title,colourInfo, ":one:" + option_one + "\n"+ option_two)
