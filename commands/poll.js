@@ -6,7 +6,7 @@ var colourWarn = config.messageColours.warn;
 
 exports.run = function(message, prefix, args) {
     //checks if anyone was that dumb and tried to make a poll in a none poll channel... Idiots...
-    if(message.channel.name = config.channel.polles){
+    if(message.channel.name = config.channel.poll){
         var Poll
         //checks for length
         if(args.length === 3){
@@ -21,7 +21,7 @@ exports.run = function(message, prefix, args) {
         var tilte = tilte + args[i] + " "
         }
         //actully sending the message
-        functions.embed(config.polles,tilte,colourInfo, ":one:" + option_one + "\n"+ option_two)
+        functions.embed(config.poll,tilte,colourInfo, ":one:" + option_one + "\n"+ option_two)
         //putting the last message(the poll) into a var for later use
         var last_message = message.channel.last_message;
         //reacting with the vote options
