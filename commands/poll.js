@@ -17,7 +17,7 @@ exports.run = function(message, prefix, args) {
         var option_two = args[1];
         //putting the title into a var with a fancy loop
         var i = 2;
-        while(i < args.length){
+        for(i < args.length){
         var title = title + args[i] + " "
         }
         //actully sending the message
