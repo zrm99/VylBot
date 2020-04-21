@@ -1,5 +1,6 @@
 const config = require('../config.json');
 const functions = require('../functions.js');
+const fs = require('fs');
 
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
@@ -15,6 +16,12 @@ exports.run = function(message, prefix, args) {
          //putting the options into a var to use later
          var optionOne = args[0];
          var optionTwo = args[1];
+         let pollOptions = {
+            optionOne = args[0],
+            optionTwo = args[1]
+         }
+         let data = JSON.stringify(pollOptions, null, 2);
+         fs.writeFileSync('poll.json', data);
          //putting the title into a var with a fancy loop
          var temp = 2;
          var title
@@ -34,6 +41,10 @@ exports.run = function(message, prefix, args) {
      }
    }if(args.length === 1){
      if(args[0] == "end"){
+             let rawdata = fs.readFileSync('poll.json');
+             let options = JSON.parse(rawdata);
+             var optionOne = options.optionOne
+             var optionTwo = options.optionTwo
              //deleting the sender message for the reaction collection thing...
              message.delete();
              //setting up stuff
@@ -49,7 +60,13 @@ exports.run = function(message, prefix, args) {
              var optionEndTwo 
              collector2.on('end', collected => optionEndTwo = `${collected.size}`);
              //sending the result
-             functions.embed(message.channel, "The Poll has ended:", colourInfo, optionEndOne + ` have chosen the first option. \n` + optionEndTwo + " have chosen the second option.");
+             var winner
+             if(optionEndTwo < optionEndOne) {
+             winner = `${optionOne} has won!`;
+             }else{
+             winner = `${optionTwo} has won!`;
+             }
+             functions.embed(message.channel,"The Poll has ended:", colourInfo, `${optionEndOne} have chosen the option: ${optionOne}\n and ${optionEndTwo} have chosen the option: ${optionTwo}\n${winner}`);
     }
    }else{
        //sends a message for all the people not knowing how to make a poll... Idiots...
