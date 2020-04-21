@@ -22,7 +22,7 @@ exports.run = function(message, prefix, args) {
         title = title + args[temp] + " "
         }
         //actully sending the message
-        functions.embed(config.poll,title,colourInfo, ":one:" + option_one + "\n"+ option_two)
+        functions.embed(config.poll,title,colourInfo, `:one: ${optionOne} \n :two: ${optionTwo}`)
         //putting the last message(the poll) into a var for later use
         var lastMessage = message.channel.last_message;
         //reacting with the vote options
