@@ -15,13 +15,13 @@ exports.run = function(message, prefix, args) {
         //putting the options into a var to use later
         var option_one = args[0];
         var option_two = args[1];
-        //putting the tilte into a var with a fancy loop
+        //putting the title into a var with a fancy loop
         var i = 2;
         while(i < args.length){
-        var tilte = tilte + args[i] + " "
+        var title = title + args[i] + " "
         }
         //actully sending the message
-        functions.embed(config.poll,tilte,colourInfo, ":one:" + option_one + "\n"+ option_two)
+        functions.embed(config.poll,title,colourInfo, ":one:" + option_one + "\n"+ option_two)
         //putting the last message(the poll) into a var for later use
         var last_message = message.channel.last_message;
         //reacting with the vote options
