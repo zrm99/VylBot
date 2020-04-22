@@ -23,7 +23,7 @@ client.on('message', (message) => {
 	
 	if (content.substring(0, prefix.length).toLowerCase() == prefix.toLowerCase()) {
 		var args = content.substring(prefix.length).split(" ");
-		
+		if(!config.disabledCommands.contains(args[0])){
 		fs.stat(`./commands/${args[0]}.js`, function(err, stat) {
 			if (err == null) {
 				try {
@@ -44,7 +44,10 @@ client.on('message', (message) => {
 				functions.embed(message.channel, "", colourWarn, "An unexpected error has occured. Please contact the bot owner");
 			}
 		});
+	}else{
+	 functions.embed(message.channel, "Whoops", colourWarn, "It seems that this Command is disabled!\nIf you belive that this is an error,\ncontact the bot Owner!");
 	}
+   }
 });
 
 client.on('messageDelete', (message) => {
