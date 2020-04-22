@@ -11,12 +11,6 @@ exports.run = function(message, prefix, args) {
 			functions.embed(message.channel, "Whoops", colourInfo,"It seems that this Command is disabled!\n If you belive that this is an error,\n contact the bot Owner!");
 		}
 	}else{
-	if(config.disabledCommands.includes('ban')){
-		message.delete();
-		if(config.commands.sendMessageIfOff == true){
-			functions.embed(message.channel, "Whoops", colourInfo,"It seems that this Command is disabled!\n If you belive that this is an error,\n contact the bot Owner!");
-		}
-	}else{
 	if (message.member.roles.find(role => role.name == config.roles.moderator)) {
 	    var user = message.mentions.users.first();
 	
