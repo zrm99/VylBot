@@ -23,7 +23,7 @@ client.on('message', (message) => {
 	
 	if (content.substring(0, prefix.length).toLowerCase() == prefix.toLowerCase()) {
 		var args = content.substring(prefix.length).split(" ");
-		if(!config.disabledCommands.contains(args[0])){
+		if(!config.disabledCommands.includes(args[0])){
 		fs.stat(`./commands/${args[0]}.js`, function(err, stat) {
 			if (err == null) {
 				try {
