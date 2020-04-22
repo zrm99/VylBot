@@ -45,8 +45,11 @@ client.on('message', (message) => {
 			}
 		});
 	}else{
+	 message.delete();
+	 if(config.sendMessageIfOff == false){
 	 functions.embed(message.channel, "Whoops", colourWarn, "It seems that this Command is disabled!\nIf you belive that this is an error,\ncontact the bot Owner!");
-	}
+	  }
+	 }
    }
 });
 
