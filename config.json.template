@@ -2,13 +2,7 @@
     "tokens": {
       "live": "",
       "dev": ""
-    },
-    "commands":{
-        "sendMessageIfOff": true
-    },
-    "disabledCommands": [
-        
-    ],
+    }
     "info": {
     	"version": "",
     	"author": "",
@@ -19,6 +13,9 @@
     	"live": "v!",
     	"dev": "d!"
     },
+    "disabledCommands": [
+        
+    ],
     "channels": {
         "logging": "logs"
     },

@@ -18,39 +18,37 @@ client.once('ready', () => {
 
 client.on('message', (message) => {
 	if (!message.guild) return;
-	
+
 	var content = message.content;
-	
+
 	if (content.substring(0, prefix.length).toLowerCase() == prefix.toLowerCase()) {
 		var args = content.substring(prefix.length).split(" ");
-		if(!config.disabledCommands.includes(args[0])){
-		fs.stat(`./commands/${args[0]}.js`, function(err, stat) {
-			if (err == null) {
-				try {
-					var commandFile = require(`./commands/${args[0]}`);
-					commandFile['run'](message, prefix, args);
-				} catch(err) {
-					console.log(`ERROR: Couldn't find command file.`);
-					console.log(`${message.content}`);
+		if(!config.disabledCommands.includes(args[0])) {
+			fs.stat(`./commands/${args[0]}.js`, function(err, stat) {
+				if (err == null) {
+					try {
+						var commandFile = require(`./commands/${args[0]}`);
+						commandFile['run'](message, prefix, args);
+					} catch(err) {
+						console.log(`ERROR: Couldn't find command file.`);
+						console.log(`${message.content}`);
+						console.log(err);
+
+						functions.embed(message.channel, "", colourWarn, "There was an error finding the command file. Please contact the bot owner");
+					}
+				} else if (err.code === 'ENOENT') {
+					functions.embed(message.channel, "", colourWarn, "Command does not exist");
+				} else {
 					console.log(err);
-					
-					functions.embed(message.channel, "", colourWarn, "There was an error finding the command file. Please contact the bot owner");
+
+					functions.embed(message.channel, "", colourWarn, "An unexpected error has occured. Please contact the bot owner");
 				}
-			} else if (err.code === 'ENOENT') {
-				functions.embed(message.channel, "", colourWarn, "Command does not exist");
-			} else {
-				console.log(err);
-				
-				functions.embed(message.channel, "", colourWarn, "An unexpected error has occured. Please contact the bot owner");
-			}
-		});
-	}else{
-	 message.delete();
-	 if(config.sendMessageIfOff == false){
-	 functions.embed(message.channel, "Whoops", colourWarn, "It seems that this Command is disabled!\nIf you belive that this is an error,\ncontact the bot Owner!");
-	  }
-	 }
-   }
+			});
+		} else {
+			message.delete();
+			functions.embed(message.channel, "Whoops", colourWarn, "It seems that this Command is disabled!\nIf you belive that this is an error,\ncontact the bot Owner!");
+		}
+	}
 });
 
 client.on('messageDelete', (message) => {
