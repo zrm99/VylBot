@@ -14,7 +14,8 @@
     	"dev": "d!"
     },
     "channels": {
-        "logging": "logs"
+        "logging": "logs",
+        "poll":   "poll"
     },
     "roles": {
         "moderator": "Moderator",

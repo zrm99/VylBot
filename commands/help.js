@@ -12,6 +12,7 @@ exports.run = function(message, prefix, args) {
 	commands += prefix + "help\n";
 	commands += prefix + "kick <user> [reason]\n";
 	commands += prefix + "mute <user> [reason]\n";
+	commands += prefix + "poll <title>;<option 1>;<option 2>...\n";
 	commands += prefix + "role <name>\n";
 	commands += prefix + "roles\n";
 	commands += prefix + "unmute <user>\n";
