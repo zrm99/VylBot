@@ -12,5 +12,4 @@ exports.run = function(message, prefix, args) {
 	commands += "Date: " + config.info.date + "\n";
 	
 	functions.embed(message.channel, "About", colourInfo, commands);
-	}
 }

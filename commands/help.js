@@ -17,4 +17,4 @@ exports.run = function(message, prefix, args) {
 	commands += prefix + "unmute <user>\n";
 	
 	functions.embed(message.channel, "Commands", colourInfo, commands);
-}}
+}

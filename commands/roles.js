@@ -12,4 +12,4 @@ exports.run = function(message, prefix, args) {
 	}
 	
 	functions.embed(message.channel, "Roles", colourInfo, roles);
-}}
+}

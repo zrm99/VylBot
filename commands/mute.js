@@ -37,4 +37,4 @@ exports.run = function(message, prefix, args) {
 	}
 	
 	message.delete();
-}}
+}

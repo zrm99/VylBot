@@ -35,4 +35,4 @@ exports.run = function(message, prefix, args) {
 	} else {
 		functions.embed(message.channel, "", colourInfo, "This role does not exist, see assignable roles with the roles command");
 	}
-}}
+}
