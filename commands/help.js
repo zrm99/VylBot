@@ -17,6 +17,7 @@ exports.run = function(message, prefix, args) {
 	commands += prefix + "role <name>\n";
 	commands += prefix + "roles\n";
 	commands += prefix + "unmute <user>\n";
+	commands += prefix + "video <title>;<Description>;<URL>;<Thumbnail>";
 	
 	functions.embed(message.channel, "Commands", colourInfo, commands);
 }

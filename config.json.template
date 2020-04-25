@@ -16,7 +16,8 @@
     "channels": {
         "logging": "logs",
         "poll":   "poll",
-        "announcements": "announcements"
+        "announcements": "announcements",
+        "newvideo": "new-videos-streams"
     },
     "roles": {
         "moderator": "Moderator",
