@@ -17,7 +17,8 @@
         "logging": "logs",
         "poll":   "poll",
         "announcements": "announcements",
-        "newvideo": "new-videos-streams"
+        "newvideo": "new-videos-streams",
+        "earlyaccess": "early-access"
     },
     "roles": {
         "moderator": "Moderator",

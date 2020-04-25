@@ -10,6 +10,7 @@ exports.run = function(message, prefix, args) {
 	commands += prefix + "about\n";
 	commands += prefix + "announce <title>;<text>;[extra]";
 	commands += prefix + "ban <user> [reason]\n";
+	commands += prefix + "earlyaccess <title>;<Description>;<URL>;<Thumbnail>";
 	commands += prefix + "help\n";
 	commands += prefix + "kick <user> [reason]\n";
 	commands += prefix + "mute <user> [reason]\n";
