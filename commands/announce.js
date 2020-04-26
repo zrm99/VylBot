@@ -1,3 +1,4 @@
+const discord = require('discord.js');
 const config = require('../config.json');
 const functions = require('../functions.js');
 
@@ -11,11 +12,15 @@ exports.run = function(message, prefix, args) {
         announcementParts = announcementParts.join(" ");
         announcementParts = announcementParts.split(";");
         
-        functions.embed(message.channel, announcementParts[0], colourInfo, announcementParts[1]);
-
-        for (let i = 2; i < announcementParts.length; i++) {
-            functions.embed(message.channel, "", colourInfo, announcementParts[i]);
-        }
+        var embed = new discord.RichEmbed()
+            .setColor(colourInfo)
+        
+        if (announcementParts[0]) embed.setTitle(announcementParts[0]);
+        if (announcementParts[1]) embed.setDescription(announcementParts[1]);
+        if (announcementParts[2]) embed.setURL(announcementParts[2]);
+        if (announcementParts[3]) embed.setThumbnail(announcementParts[3]);
+		
+        message.channel.send(embed);
 
         message.delete();
     } else {
