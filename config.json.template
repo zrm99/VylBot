@@ -14,11 +14,7 @@
     	"dev": "d!"
     },
     "channels": {
-        "logging": "logs",
-        "poll":   "poll",
-        "announcements": "announcements",
-        "newvideo": "new-videos-streams",
-        "earlyaccess": "early-access"
+        "logging": "logs"
     },
     "roles": {
         "moderator": "Moderator",
