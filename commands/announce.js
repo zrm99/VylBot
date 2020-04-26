@@ -11,10 +11,10 @@ exports.run = function(message, prefix, args) {
         announcementParts = announcementParts.join(" ");
         announcementParts = announcementParts.split(";");
         
-        functions.embed(message.guild.channels.find(channel => channel.name == config.channels.announcements), announcementParts[0], colourInfo, announcementParts[1]);
+        functions.embed(message.channel, announcementParts[0], colourInfo, announcementParts[1]);
 
         for (let i = 2; i < announcementParts.length; i++) {
-            functions.embed(message.guild.channels.find(channel => channel.name == config.channels.announcements), "", colourInfo, announcementParts[i]);
+            functions.embed(message.channel, "", colourInfo, announcementParts[i]);
         }
 
         message.delete();

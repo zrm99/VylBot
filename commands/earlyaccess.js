@@ -19,7 +19,7 @@ exports.run = function(message, prefix, args) {
             .setURL(announcementParts[2])
             .setThumbnail(announcementParts[3]);
 		
-        message.guild.channels.find(channel => channel.name == config.channels.earlyaccess).send(embed);
+        message.channel.send(embed);
 
         message.delete();
     } else {

@@ -8,9 +8,9 @@ exports.run = function(message, prefix, args) {
 	var commands = "";
 	
 	commands += prefix + "about\n";
-	commands += prefix + "announce <title>;<text>;[extra]";
+	commands += prefix + "announce <title>;<text>;[extra]\n";
 	commands += prefix + "ban <user> [reason]\n";
-	commands += prefix + "earlyaccess <title>;<Description>;<URL>;<Thumbnail>";
+	commands += prefix + "earlyaccess <title>;<Description>;<URL>;<Thumbnail>\n";
 	commands += prefix + "help\n";
 	commands += prefix + "kick <user> [reason]\n";
 	commands += prefix + "mute <user> [reason]\n";
@@ -18,7 +18,7 @@ exports.run = function(message, prefix, args) {
 	commands += prefix + "role <name>\n";
 	commands += prefix + "roles\n";
 	commands += prefix + "unmute <user>\n";
-	commands += prefix + "video <title>;<Description>;<URL>;<Thumbnail>";
+	commands += prefix + "video <title>;<Description>;<URL>;<Thumbnail>\n";
 	
 	functions.embed(message.channel, "Commands", colourInfo, commands);
 }
