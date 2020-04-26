@@ -8,6 +8,7 @@ exports.run = function(message, prefix, args) {
 	var commands = "";
 	
 	commands += prefix + "about\n";
+	commands += prefix + "announce [title];[description];[url];[thumbnail]\n";
 	commands += prefix + "ban <user> [reason]\n";
 	commands += prefix + "help\n";
 	commands += prefix + "kick <user> [reason]\n";
