@@ -7,7 +7,7 @@ var colourWarn = config.messageColours.warn;
 exports.run = function(message, prefix, args) {
 	var roles = config.assignableRoles;
 	var requestedRole = "";
-	
+	if(args.length > 1){
 	for (let i = 0; i < roles.length; i++) {
 		if (roles[i].toLowerCase() == args[1].toLowerCase()) {
 			requestedRole = roles[i];
@@ -35,4 +35,7 @@ exports.run = function(message, prefix, args) {
 	} else {
 		functions.embed(message.channel, "", colourInfo, "This role does not exist, see assignable roles with the roles command");
 	}
+ }else{
+	functions.embed(message.channel,"Incorrect usage!",colourInfo,`Please use:\n${config.prefix.live}role <role>`)
+ }
 }
