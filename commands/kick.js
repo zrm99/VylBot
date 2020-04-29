@@ -8,7 +8,7 @@ var colourWarn = config.messageColours.warn;
 exports.run = function(message, prefix, args) {
 	if (message.member.roles.find(role => role.name == config.roles.moderator)) {
 		var user = message.mentions.users.first();
-		var name = message.guild.name;
+		var serverName = message.guild.name;
 	
 	    if (user) {
 	        var member = message.guild.member(user);
@@ -20,7 +20,7 @@ exports.run = function(message, prefix, args) {
 				var reason = argsReason.join(" ");
 				if(message.guild.available){
 				var embed = new discord.RichEmbed()
-						.setTitle(`You have been kicked from: ${name}`)
+						.setTitle(`You have been kicked from: ${serverName}`)
 						.setColor(colourWarn)
 						.setDescription(`For the reason: ${reason}`);
 				member.send(embed).then(()=>{
