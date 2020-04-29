@@ -36,6 +36,6 @@ exports.run = function(message, prefix, args) {
 		functions.embed(message.channel, "", colourInfo, "This role does not exist, see assignable roles with the roles command");
 	}
  }else{
-	functions.embed(message.channel,"Incorrect usage!",colourInfo,`Please use:\n${config.prefix.live}role <role>`)
+	functions.embed(message.channel,"Incorrect usage!",colourInfo,`Please use:\n${prefix}role <role>`)
  }
 }
