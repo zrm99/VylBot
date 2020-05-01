@@ -11,7 +11,7 @@ exports.run = function(message, prefix, args) {
         announcementParts.splice(0, 1);
         announcementParts = announcementParts.join(" ");
         announcementParts = announcementParts.split(";");
-        
+
         var embed = new discord.RichEmbed()
             .setColor(colourInfo)
         
@@ -19,8 +19,10 @@ exports.run = function(message, prefix, args) {
         if (announcementParts[1]) embed.setDescription(announcementParts[1]);
         if (announcementParts[2]) embed.setURL(announcementParts[2]);
         if (announcementParts[3]) embed.setThumbnail(announcementParts[3]);
-		
-        message.channel.send(embed);
+        
+        message.channel.send(embed).catch(() => {
+            functions.embed(message.channel, "", colourWarn, "An error occured. Are the url and/or thumbnail parameters actual links?");
+        });
 
         message.delete();
     } else {
