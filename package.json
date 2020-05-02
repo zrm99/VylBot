@@ -7,7 +7,7 @@
     "start": "node bot.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vylpes, Simyon",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.1"

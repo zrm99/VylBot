@@ -28,6 +28,9 @@ client.on('message', (message) => {
 			if (err == null) {
 				try {
 					var commandFile = require(`./commands/${args[0]}`);
+					// Message: The entire message object
+					// Prefix: the prefix configured
+					// Args: The string containing the command argument array, including the command name
 					commandFile['run'](message, prefix, args);
 				} catch(err) {
 					console.log(`ERROR: Couldn't find command file.`);
@@ -65,3 +68,7 @@ if (devBuild) {
 } else {
 	client.login(config.tokens.live);
 }
+
+process.on('unhandledRejection', (err) => {
+	console.error(err);
+});
