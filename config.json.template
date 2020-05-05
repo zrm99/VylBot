@@ -2,7 +2,7 @@
     "tokens": {
       "live": "",
       "dev": ""
-    },
+    }
     "info": {
     	"version": "",
     	"author": "",
@@ -13,6 +13,9 @@
     	"live": "v!",
     	"dev": "d!"
     },
+    "disabledCommands": [
+        
+    ],
     "channels": {
         "logging": "logs"
     },

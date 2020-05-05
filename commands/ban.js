@@ -42,8 +42,8 @@ exports.run = function(message, prefix, args) {
 	        functions.embed(message.channel, "", colourWarn, "Please specify a user by mentioning them");
 	    }
 	} else {
-	    functions.embed(message.channel, "", colourWarn, "You do not have permission to run this command");
+		functions.embed(message.channel, "", colourWarn, "You do not have permission to run this command");
 	}
-	
+
 	message.delete();
 }
