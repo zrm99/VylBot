@@ -6,6 +6,14 @@ const discord = require('discord.js');
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
 
+module.exports = {
+	name: 'poll',
+	description: 'Genereates a poll with reaction numbers.',
+	category: 'general',
+	usage: '<title>;<option 1>;<option 2>...',
+	roles: 'Moderator'
+}
+
 exports.run = function(message, prefix, args) {
     //checks for permissions because thats how it works right?
     if(message.member.roles.find(role => role.name == config.roles.moderator)) {

@@ -5,6 +5,14 @@ const functions = require('../functions.js');
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
 
+module.exports = {
+	name: 'announce',
+	description: 'Announce something in an embed',
+	category: 'moderation',
+	usage: '<title>;[description];[url];[thumbnail]',
+	roles: 'Moderator'
+}
+
 exports.run = function(message, prefix, args) {
     if (message.member.roles.find(role => role.name == config.roles.moderator)) {
         if (args.length > 1) {

@@ -4,6 +4,14 @@ const functions = require('../functions.js');
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
 
+module.exports = {
+	name: 'clear',
+	description: 'Bulk deletes the chat for up to 100 messages',
+	category: 'moderation',
+	usage: '<amount>',
+	roles: 'Moderator'
+}
+
 exports.run = function(message, prefix, args){
     if (message.member.roles.find(role => role.name == config.roles.moderator || config.roles.admin)) {
         if(args.length > 1){

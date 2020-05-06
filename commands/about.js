@@ -4,6 +4,14 @@ const functions = require('../functions.js');
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
 
+module.exports = {
+	name: 'about',
+	description: 'About the bot',
+	category: 'general',
+	usage: '',
+	roles: 'everyone'
+}
+
 exports.run = function(message, prefix, args) {
 	var commands = "";
 	

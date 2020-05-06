@@ -5,6 +5,14 @@ const discord = require('discord.js');
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
 
+module.exports = {
+	name: 'ban',
+	description: 'Bans a mentioned user and DMs them with an optional reason',
+	category: 'moderation',
+	usage: '<user> [reason]',
+	roles: 'Moderator'
+}
+
 exports.run = function(message, prefix, args) {
 	if (message.member.roles.find(role => role.name == config.roles.moderator)) {
 	    var user = message.mentions.users.first();

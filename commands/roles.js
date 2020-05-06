@@ -4,6 +4,14 @@ const functions = require('../functions.js');
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
 
+module.exports = {
+	name: 'roles',
+	description: 'Lists all the roles available to get',
+	category: 'general',
+	usage: '',
+	roles: 'everyone'
+}
+
 exports.run = function(message, prefix, args) {
 	var roles = "";
 	
