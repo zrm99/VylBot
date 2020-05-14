@@ -13,7 +13,7 @@ module.exports = {
 	usage: '',
 	roles: 'everyone',
 	run: function(message, prefix, args) {
-		var categories = config.commandCategories;
+		var categories = config.commands.categories;
 		var files = fs.readdirSync('./commands');
 
 		var embed = new discord.RichEmbed()
