@@ -13,35 +13,28 @@ module.exports = {
 	usage: '',
 	roles: 'everyone',
 	run: function(message, prefix, args) {
-		var categoryGeneral = "";
-		var categoryModeration = "";
-		var categoryOther = "";
-	
+		var categories = config.commandCategories;
 		var files = fs.readdirSync('./commands');
-	
-		for(let i = 0; i < files.length; i++) {
-			var file = require(`./${files[i]}`);
-
-			if (file.category == 'general') {
-				categoryGeneral += `\`${file.name}\``;
-				if (i < files.length - 1) categoryGeneral += ', ';
-			} else if (file.category == 'moderation') {
-				categoryModeration += `\`${file.name}\``;
-				if (i < files.length - 1) categoryModeration += ', ';
-			} else {
-				categoryOther += `\`${file.name}\``;
-				if (i < files.length - 1) categoryOther += ', ';
-			}
-		}
 
 		var embed = new discord.RichEmbed()
-		.setTitle("Commands")
-		.setColor(colourInfo)
-		.setDescription("");
+			.setTitle("Commands")
+			.setColor(colourInfo)
+			.setDescription("");
 
-		if (categoryGeneral != "") embed.addField("General", categoryGeneral);
-		if (categoryModeration != "") embed.addField("Moderation", categoryModeration);
-		if (categoryOther != "") embed.addField("Other", categoryOther);
+		for (let i = 0; i < categories.length; i++) {
+			var categoryText = "";
+			var categoryName = categories[i].charAt(0).toUpperCase() + categories[i].substring(1);
+
+			for (let j = 0; j < files.length; j++) {
+				var file = require(`./${files[j]}`);
+
+				if (file.category == categories[i]) {
+					categoryText += `\`${file.name}\`, `;
+				}
+			}
+
+			embed.addField(categoryName, categoryText);
+		}
 		
 		message.channel.send(embed);
 	}

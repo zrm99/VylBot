@@ -16,6 +16,10 @@
     "disabledCommands": [
         
     ],
+    "commandCategories": [
+        "general",
+        "moderation"
+    ],
     "channels": {
         "logging": "logs"
     },
