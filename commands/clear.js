@@ -7,7 +7,7 @@ var colourWarn = config.messageColours.warn;
 exports.run = function(message, prefix, args){
     if (message.member.roles.find(role => role.name == config.roles.moderator || config.roles.admin)) {
         if(args.length > 1){
-            if(args[1] < 100){
+            if(args[1] < 101){
             message.channel.bulkDelete(args[1]).then(() =>{
                 functions.embed(message.channel,"Success", colourInfo,`${args[1]} messages were removed!`)
             }).catch(() => {
