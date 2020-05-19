@@ -7,7 +7,7 @@ var colourWarn = config.messageColours.warn;
 
 module.exports = {
 	name: 'ban',
-	description: 'Bans a mentioned user and DMs them with an optional reason',
+	description: 'Bans the mentioned user and DMs them with an optional reason',
 	category: 'moderation',
 	usage: '<user> [reason]',
 	roles: 'Moderator',

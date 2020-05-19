@@ -6,7 +6,7 @@ var colourWarn = config.messageColours.warn;
 
 module.exports = {
 	name: 'unmute',
-	description: 'Unmutes a mentioned user and DMs them',
+	description: 'Unmutes the mentioned user and DMs them',
 	category: 'moderation',
 	usage: '<user>',
 	roles: 'Moderator',

@@ -7,7 +7,7 @@ var colourWarn = config.messageColours.warn;
 
 module.exports = {
 	name: 'mute',
-	description: 'Mutes a mentioned user and DMs them with an optional reason',
+	description: 'Mutes the mentioned user and DMs them with an optional reason',
 	category: 'moderation',
 	usage: '<user> [reason]',
 	roles: 'Moderator',

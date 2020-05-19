@@ -8,7 +8,7 @@ var colourWarn = config.messageColours.warn;
 
 module.exports = {
 	name: 'help',
-	description: 'Gives a lost of commands available in the bot',
+	description: 'Gives a list of commands available in the bot',
 	category: 'general',
 	usage: '[command]',
 	roles: 'everyone',
@@ -38,7 +38,7 @@ module.exports = {
 			}
 			
 			message.channel.send(embed);
-		} else if (args.length == 2) {
+		} else if (args.length >= 2) {
 			fs.stat(`./commands/${args[1]}.js`, function(err, stat) {
 				if (err == null) {
 					var commandFile = require(`./${args[1]}.js`);
@@ -62,8 +62,6 @@ module.exports = {
 					functions.embed(message.channel, "", colourWarn, "An unexpected error has occured. Please contact the bot owner");
 				}
 			});
-		} else {
-			functions.embed(message.channel, "", colourWarn, `Usage: \`${this.usage}\``)
 		}
 	}
 }

@@ -7,7 +7,7 @@ var colourWarn = config.messageColours.warn;
 
 module.exports = {
 	name: 'kick',
-	description: 'Kicks a mentioned user and DMs them with an optional reason',
+	description: 'Kicks the mentioned user and DMs them with an optional reason',
 	category: 'moderation',
 	usage: '<user> [reason]',
 	roles: 'Moderator',
