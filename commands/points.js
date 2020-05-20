@@ -138,11 +138,11 @@ exports.run = function(message, prefix, args) {
                 author = tableTickets[i];
             }
             }
-            authorPoints = author.points;
-            targetPoints = target.points;
+            authorPoints = parseInt(author.points);
+            targetPoints = parseInt(target.points);
             if(user){
                 if(amount){
-                    if(!authorPoints < amount){
+                    if(authorPoints > amount){
                         if(target == null){
                             tableTickets.push({
                                 "tag": user,
