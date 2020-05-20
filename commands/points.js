@@ -142,7 +142,7 @@ exports.run = function(message, prefix, args) {
             targetPoints = target.points;
             if(user){
                 if(amount){
-                    if(authorPoints > amount){
+                    if(!authorPoints < amount){
                         if(target == null){
                             tableTickets.push({
                                 "tag": user,
@@ -154,9 +154,10 @@ exports.run = function(message, prefix, args) {
                                 }
                             }
                         }else{
+                            var endPointsTarget = parseInt(targetPoints) + parseInt(amount);
                             for (let i = 0; i < tableTickets.length; i++) {
                                 if (tableTickets[i].tag == user) {
-                                    tableTickets[i].points=targetPoints+amount;
+                                    tableTickets[i].points=endPointsTarget;
                                 }
                             }
                             for (let i = 0; i < tableTickets.length; i++) {
