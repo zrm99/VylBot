@@ -1,3 +1,4 @@
 config.json
 poll.json
 .DS_Store
+node_modules
