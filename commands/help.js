@@ -33,8 +33,8 @@ module.exports = {
 						categoryText += `\`${file.name}\`, `;
 					}
 				}
-	
-				embed.addField(categoryName, categoryText);
+
+				if (categoryText != "") embed.addField(categoryName, categoryText);
 			}
 			
 			message.channel.send(embed);
