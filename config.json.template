@@ -13,6 +13,15 @@
     	"live": "v!",
     	"dev": "d!"
     },
+    "commands": {
+        "disabled": [
+            
+        ],
+        "categories": [
+            "general",
+            "moderation"
+        ]
+    },
     "channels": {
         "logging": "logs"
     },
