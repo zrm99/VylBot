@@ -1,5 +1,6 @@
 const config = require('../config.json');
 const functions = require('../functions.js');
+const discord = require('discord.js');
 const fs = require('fs');
 
 var colourInfo = config.messageColours.info;
@@ -17,11 +18,19 @@ module.exports = {
 			rulesText = rulesText.split("> ");
 
 			for (let i = 1; i < rulesText.length; i++) {
-				let rulesLines = rulesText[i].split("\n");
-				let rulesTitle = rulesLines[0];
-				let rulesDescription = rulesLines.slice(1).join("\n");
+				if (rulesText[i].charAt(0) == '#') {
+					var embed = new discord.RichEmbed()
+					.setColor(colourInfo)
+					.setImage(rulesText[i].substring(1));
+					
+					message.channel.send(embed);
+				} else {
+					let rulesLines = rulesText[i].split("\n");
+					let rulesTitle = rulesLines[0];
+					let rulesDescription = rulesLines.slice(1).join("\n");
 
-				functions.embed(message.channel, rulesTitle, colourInfo, rulesDescription);
+					functions.embed(message.channel, rulesTitle, colourInfo, rulesDescription);
+				}
 			}
 		} else {
 			functions.embed(message.channel, "Error", colourWarn, "rules.txt doesn't exist");
