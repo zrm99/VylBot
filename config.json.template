@@ -19,7 +19,8 @@
         ],
         "categories": [
             "general",
-            "moderation"
+            "moderation",
+            "owner"
         ]
     },
     "channels": {
