@@ -24,12 +24,14 @@
         ]
     },
     "channels": {
-        "logging": "logs"
+        "logging": "logs",
+        "rules": "rules"
     },
     "roles": {
         "moderator": "Moderator",
         "admin": "Admin",
-        "muted": "Muted"
+        "muted": "Muted",
+        "owner": "Owner"
     },
     "assignableRoles": [
     	"Notify",
