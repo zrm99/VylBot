@@ -25,19 +25,18 @@ module.exports = {
 					
 					var reason = argsReason.join(" ");
 					if(message.guild.available){
-					var embed = new discord.RichEmbed()
-							.setTitle(`You have been warned in: ${serverName}`)
-							.setColor(colourWarn)
-							.setDescription(`For the reason: ${reason}`);
-					member.send(embed).then(()=>{
-						functions.embed(message.channel, "", colourInfo, user.tag + " has been warned");
-						functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Warned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
-				}).catch(() => {
-					functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Error(While DMing user)", colourWarn,"An error occurred while DMing a user.\nIs the user in this Server?")
-				});
-				}else{
-	
-				}
+						var embed = new discord.RichEmbed()
+								.setTitle(`You have been warned in: ${serverName}`)
+								.setColor(colourWarn)
+								.setDescription(`For the reason: ${reason}`);
+						member.send(embed).then(()=>{
+							functions.embed(message.channel, "", colourInfo, user.tag + " has been warned");
+							functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Warned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+						}).catch(() => {
+							functions.embed(message.channel, "", colourInfo, user.tag + " has been warned");
+							functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Warned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+						});
+					}
 				} else {
 					functions.embed(message.channel, "", colourWarn, "This user is not in the server");
 				}

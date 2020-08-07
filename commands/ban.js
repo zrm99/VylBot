@@ -24,20 +24,25 @@ module.exports = {
 		
 					var reason = argsReason.join(" ");
 					if(message.guild.available){
-					var embed = new discord.RichEmbed()
-							.setTitle(`You were banned from: ${serverName}`)
-							.setColor(colourWarn)
-							.setDescription(`For the reason: ${reason}`);
-					member.send(embed).then(()=>{
-						member.ban().then(() => {
-							functions.embed(message.channel, "", colourInfo, user.tag + " has been banned");
-							functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Banned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+						var embed = new discord.RichEmbed()
+								.setTitle(`You were banned from: ${serverName}`)
+								.setColor(colourWarn)
+								.setDescription(`For the reason: ${reason}`);
+						member.send(embed).then(()=>{
+							member.ban().then(() => {
+								functions.embed(message.channel, "", colourInfo, user.tag + " has been banned");
+								functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Banned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+							}).catch(() => {
+								functions.embed(message.channel, "", colourWarn, "There was an error banning this user, maybe I'm missing permissions?");
+							});
 						}).catch(() => {
-							functions.embed(message.channel, "", colourWarn, "There was an error banning this user, maybe I'm missing permissions?");
+							member.ban().then(() => {
+								functions.embed(message.channel, "", colourInfo, user.tag + " has been banned");
+								functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Banned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+							}).catch(() => {
+								functions.embed(message.channel, "", colourWarn, "There was an error banning this user, maybe I'm missing permissions?");
+							});
 						});
-					}).catch(() => {
-						functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Error(While DMing user)", colourWarn, "An error occurred while DMing a user.\n Is the user in this Server?")// Maybe not public? ok
-					});
 					}else{
 					functions.embed(message.channel, "Err", colourWarn, "An unkown error occurerd")
 					}
