@@ -64,6 +64,16 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 	functions.embed(newMessage.guild.channels.find(channel => channel.name == config.channels.logging), "Message Edited", colourInfo, `Member: ${newMessage.author.tag}\nOld: ${oldMessage.content}\nNew: ${newMessage.content}\nChannel: ${newMessage.channel}`);
 });
 
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+	if (oldMember.nickname != newMember.nickname) {
+		let memberName = newMember.user.tag;
+		let oldNickname = oldMember.nickname || "*none*";
+		let newNickname = newMember.nickname || "*none*";
+
+		functions.embed(newMember.guild.channels.find(channel => channel.name == config.channels.logging), "Nickname Changed", colourInfo, `Member: ${memberName}\nOld: ${oldNickname}\nNew: ${newNickname}`);
+	}
+});
+
 if (devBuild) {
 	client.login(config.tokens.dev);
 } else {
