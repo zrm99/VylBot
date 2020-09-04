@@ -8,7 +8,7 @@ module.exports = {
     name: 'role',
     description: 'Toggles a role for the user to gain/remove',
     category: 'general',
-    usage: '<name>',
+    usage: '[name]',
     roles: 'everyone',
     run: function(message, prefix, args) {
 		var roles = config.assignableRoles;
