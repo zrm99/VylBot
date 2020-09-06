@@ -31,7 +31,6 @@ module.exports = {
                             }
                         } else if (err.code === 'ENOENT') {
                             functions.embed(message.channel, "", colourWarn, "Command does not exist");
-                            console.log(err)
                         } else {
                             console.log(err);
         
