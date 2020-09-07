@@ -2,7 +2,11 @@ const discord = require('discord.js');
 const config = require("../config.json")
 const fs = require("fs")
 const functions = require("../functions.js")
-const devBuild = config.info.devBuild;
+
+var cmdArgs = process.argv.slice(2);
+var devBuild = false;
+
+if(cmdArgs.includes("-dev")) devBuild = true;
 
 module.exports = {
     run: function(client) {
@@ -31,7 +35,6 @@ module.exports = {
                             }
                         } else if (err.code === 'ENOENT') {
                             functions.embed(message.channel, "", colourWarn, "Command does not exist");
-                            console.log(err)
                         } else {
                             console.log(err);
         
