@@ -1,0 +1,11 @@
+{
+    "categories":[
+        "Role Items",
+        "Point items",
+        "other Items"
+    ],
+    "config":{
+        "maxItemsForPage": 1
+    }
+
+}

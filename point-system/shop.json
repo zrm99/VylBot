@@ -1,0 +1,9 @@
+[
+    {"name": "give_rank_test","action": "give_rank","action_parameter": "Muted","description":"On buy this will give you the role Muted","cost": 1, "category": "other Items"},
+    {"name": "max_buys_test","action":"point_up","action_parameter": 5,"description":"This is the test for max_buys you should only be able to buy this 5 times","cost": 0,"max_buys": 10,"category": "other Items"},
+    {"name":"send_message_test_title","action":"send_message","action_parameter":"test message","cost":0,"title": "Title","category":"other Items"},
+    {"name":"send_message_test","action":"send_message","action_parameter":"test message","cost":0,"category": "other Items"},    
+    {"name":"send_message_with_delay_test","action":"send_message","action_parameter":"test message","cost":0,"delay": 5000,"category": "other Items"},
+    {"name": "Test for spaces.","action": "send_message","action_parameter":"If you read this... It worked.", "cost":1,"category": "other Items"},
+    {"name": "Pizza!", "description": "Pizza is nice!", "action": "send_message", "action_parameter": "Yummy!", "cost": 100, "category": "other Items", "image": "https://www.delonghi.com/Global/recipes/multifry/3.jpg"}
+]

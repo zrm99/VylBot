@@ -13,6 +13,15 @@
     	"live": "v!",
     	"dev": "d!"
     },
+    "commands": {
+        "disabled": [
+            
+        ],
+        "categories": [
+            "general",
+            "moderation"
+        ]
+    },
     "channels": {
         "logging": "logs"
     },
@@ -28,12 +37,5 @@
     "messageColours": {
     	"info": "0x0754c6",
     	"warn": "0xe02702"
-    },
-    "generalConfigPoints":{
-        "enableRanks": true,
-        "timeBetweenMessages": 500000,
-        "tickRate": 10,
-        "announcePoints": true,
-        "logging": false
     }
 }

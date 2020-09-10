@@ -8,7 +8,7 @@ var colourGold = 0xf9ee11;
 //add (done)
 //set (done)
 //reset (done)
-//give
+//give (done)
 if(config.info.devBuild === false){
 var prefixHelp = config.prefix.live
 }else{
@@ -16,61 +16,77 @@ var prefixHelp = config.prefix.dev
 }
 var usage = "";
 usage += prefixHelp + "points\n";
+/*/
 if(config.generalConfigPoints.enableRanks){
 usage += "This will show you your rank and your points\n";
 }else{
 usage += "This will show you your points\n"
 }
+/*/
 usage += prefixHelp + "points set <user> <amount>\n";
 usage += "This will set the points of the specified user to the given amount\n";
 usage += prefixHelp + "points add <user> <amount>\n";
 usage += "This will add points to the specified user\n";
-usage += prefixHelp + "points reset";
-usage += "This will reset all Points";
+usage += prefixHelp + "points reset\n";
+usage += "This will reset all Points\n";
 usage += prefixHelp + "points give <user> <amount>\n";
 usage += "This will give the specified user a cetain amount of points\n";
 //pain
-exports.run = function(message, prefix, args) {
+module.exports = {
+name: 'points',
+description: `A command for accessing points`,
+category: 'point-system',
+usage: '[help]',
+roles: 'Everyone',
+cost: functions.commandCost("points"),
+run: function(message, prefix, args) {
     var dbTickets = fs.readFileSync('./points.json');
     var tableTickets = JSON.parse(dbTickets);
-    
+    if(functions.pointBanned(message.author.id) == true){
+        functions.embed(message.channel,"",colourInfo,"You are point-banned and because of that you cannot access the shop!")
+    }else{
     if (args[1] == "all") {
+        if(args.length > 1){
+        var maxpages = Math.ceil(tableTickets.length / config.generalConfigPoints.maximumEntriesPerPage)
+        var page = Math.abs(parseInt(args[2]))
         var lines = "";
-        
-        for (let i = 0; i < tableTickets.length; i++) {
-            lines += `${tableTickets[i].tag}: ${tableTickets[i].points}\n`;
+        var items = 0
+        if(page > maxpages){
+            page = maxpages
         }
-        functions.embed(message.channel, "All Points", colourGold, lines);
-    }else if(args[1] == "add"){
-        if(args.length === 4){
-        var user = message.mentions.users.first().tag;
-        var amount = args[3];
-        let userPoints;
+        if(typeof args[2] == "undefined"){
+            page = 1
+        }
+        tableTickets.forEach(element => {
+            
+        });
+        var count = config.generalConfigPoints.maximumEntriesPerPage * (page - 1)
         for (let i = 0; i < tableTickets.length; i++) {
-            if (tableTickets[i].tag == user) {
-                userPoints = tableTickets[i];
-        }}
+            if(items !== config.generalConfigPoints.maximumEntriesPerPage){
+                if(count < i || count == i){
+                    items = items + 1
+                    lines += `${tableTickets[i].tag}: ${tableTickets[i].points}\n\n`;
+                }
+            }
+        }
+        functions.embedWithFooter(message.channel,"All Points",colourGold,lines,`Page ${page} of ${maxpages}`)
+        }else{
+            functions.embed(message.channel,"Incorect usage",colourWarn,`Please do ${prefix}points all <page>`)
+        }
+    }else if(args[1] == "add"){
+        if (message.member.roles.cache.find(role => role.name == config.roles.moderator)) {
+        if(args.length === 4){
+        var user = message.mentions.users.first().id;
+        var userTag = message.mentions.users.first().tag;
+        var amount = parseInt(args[3]);
         if(user){
         if(amount){
-            if (userPoints == null) {
-				tableTickets.push({
-					"tag": user,
-					"points": amount
-                });
-                functions.embed(message.channel,"Success!",colourGold,`You added ${amount} Point(s) to ${user}!`)
-			} else {
-				for (let i = 0; i < tableTickets.length; i++) {
-					if (tableTickets[i].tag == user) {
-                        let loop = amount
-                        while(loop > 0){
-                        tableTickets[i].points++;
-                        loop = loop - 1;
-                        }
-					}
-                }
-                functions.embed(message.channel,"Success!",colourGold,`You added ${amount} Point(s) to ${user}!`)
+            if(amount > 0){
+                functions.pointManager("give",amount,user,userTag)
+            }else{
+                functions.pointManager("take",Math.abs(amount),user,userTag)
             }
-            fs.writeFileSync('./points.json', JSON.stringify(tableTickets));
+            functions.embed(message.channel,"Success!",colourInfo,`Added ${amount} Points!`)
         }else{
             functions.embed(message.channel,"Incorect usage",colourWarn,"Please specify the amount")
         }
@@ -80,33 +96,19 @@ exports.run = function(message, prefix, args) {
     }else{
         functions.embed(message.channel,"Incorect usage",colourWarn,`Please do ${prefix}points add <user> <amount>`)
     }
+    }else{
+        functions.embed(message.channel,"",colourWarn,"You do not have permissons to run this command")
+    }
     }else if(args[1] == "set"){
+        if (message.member.roles.cache.find(role => role.name == config.roles.moderator)) {
         if(args.length === 4){
-            var user = message.mentions.users.first().tag;
+            var user = message.mentions.users.first().id;
             var amount = args[3];
-            let userPoints;
-            for (let i = 0; i < tableTickets.length; i++) {
-                if (tableTickets[i].tag == user) {
-                    userPoints = tableTickets[i];
-            }}
+            let userTag = message.mentions.users.first().tag;
             if(user){
                 if(amount){
-                    if(userPoints == null){
-                        tableTickets.push({
-                            "tag": user,
-                            "points": amount
-                        });
-                        functions.embed(message.channel,"Success!",colourGold,`You set the amount of Points for: ${user} to ${amount}`)
-                    }else{
-                        for (let i = 0; i < tableTickets.length; i++) {
-                            if (tableTickets[i].tag == user) {
-                                tableTickets[i].points=amount;
-                            }
-                        }
-                        functions.embed(message.channel,"Success!",colourGold,`You set the amount of Points for: ${user} to ${amount}`)
-                    }
-                    fs.writeFileSync('./points.json', JSON.stringify(tableTickets));
-                    
+                    functions.pointManager("set",amount,user,userTag)
+                    functions.embed(message.channel,"Success!",colourInfo,`Set points for ${userTag} to ${amount}!`)
                 }else{
                     functions.embed(message.channel, "Incorect usage",colourWarn,`Please do ${prefix}points set <use> <amount>`)
                 }
@@ -116,71 +118,46 @@ exports.run = function(message, prefix, args) {
         }else{
             functions.embed(message.channel, "Incorect usage",colourWarn,`Please do ${prefix}points set <use> <amount>`)
         }
-        
+    }else{
+        functions.embed(message.channel,"",colourWarn,"You do not have permissions to run this command")
+    }
     }else if(args[1] == "reset"){
-        //oof moment comes
+        if (message.member.roles.cache.find(role => role.name == config.roles.moderator)) {
         fs.writeFileSync('./points.json',"[]");
         
         functions.embed(message.channel, "Success!", colourGold, `All points were reset`)
+        }else{
+            functions.embed(message.channel,"",colourWarn,"You do not have permissions to run this command")
+        }
     }else if(args[1] == "give"){
         if(args.length === 4){
-            var user = message.mentions.users.first().tag;
+            var user = message.mentions.users.first().id;
+            let tag = message.mentions.users.first().tag;
             var amount = args[3];
-            var target;
-            var author;
+            if(amount == Math.ceil(amount)){
             var authorPoints;
             var targetPoints;
-            for (let i = 0; i < tableTickets.length; i++) {
-                if (tableTickets[i].tag == user) {
-                    target = tableTickets[i];
-            }
-            if(tableTickets[i].tag == message.author.tag){
-                author = tableTickets[i];
-            }
-            }
-            authorPoints = parseInt(author.points);
-            targetPoints = parseInt(target.points);
+            targetPoints = parseInt(functions.pointManager("fetch",0,user,tag))
+            authorPoints = parseInt(functions.pointManager("fetch",0,message.author.id,message.author.tag))
             if(user){
                 if(amount){
                     if(authorPoints > amount){
-                        if(target == null){
-                            tableTickets.push({
-                                "tag": user,
-                                "points": amount
-                            });
-                            for (let i = 0; i < tableTickets.length; i++) {
-                                if (tableTickets[i].tag == message.author.tag) {
-                                    tableTickets[i].points=authorPoints-amount
-                                }
+                        function error(Return) {
+                            functions.embed(message.channel,"Error",colourWarn,`Code: ${Return}`)
+                        }
+                        let return1 = functions.pointManager("take",amount,message.author.id,message.author.tag)
+                        if(return1 = "0"){
+                            let return2 = functions.pointManager("give",amount,user,tag)
+                            if(return2 = "0"){
+                                functions.embedWithFooter(message.channel,"Success!",colourInfo,`${amount} Points were transfered! You now have ${functions.pointManager("fetch",0,message.author.id,message.author.tag)} Points\nAnd ${tag} now has ${functions.pointManager("fetch",0,user,tag)}`,`Do ${prefix}points to see your points!`)
+                            }else{
+                                error(return2)
                             }
                         }else{
-                            var endPointsTarget = parseInt(targetPoints) + parseInt(amount);
-                            for (let i = 0; i < tableTickets.length; i++) {
-                                if (tableTickets[i].tag == user) {
-                                    tableTickets[i].points=endPointsTarget;
-                                }
-                            }
-                            for (let i = 0; i < tableTickets.length; i++) {
-                                if (tableTickets[i].tag == message.author.tag) {
-                                    tableTickets[i].points=authorPoints-amount
-                                }
-                            }
+                            error(return1)
                         }
-                        fs.writeFileSync('./points.json', JSON.stringify(tableTickets));
-                        for (let i = 0; i < tableTickets.length; i++) {
-                            if (tableTickets[i].tag == user) {
-                                target = tableTickets[i];
-                        }}
-                        for(let i = 0; i < tableTickets.length; i++){
-                            if(tableTickets[i].tag == message.author.tag){
-                                author = tableTickets[i];
-                            }
-                        authorPoints = author.points;
-                        targetPoints = target.points;
-                        }
-                        functions.embed(message.channel,"Succsess",colourInfo,`${amount} Point(s) were given to ${user}\n ${user} now has ${targetPoints} Point(s)\nYou now have ${authorPoints} Point(s)`)
                     }else{
-                        functions.embed(message.channel, "Not enouh points",colourWarn,`You dont have enough points\nYou have ${authorPoints} point(s)\nAnd you tried to give ${amount} Point(s)`)
+                        functions.embed(message.channel,"Oops!",colourWarn,`You do not have enough points!\nYou need ${amount} Point(s) and you have ${authorPoints}`)
                     }
                 }else{
                     functions.embed(message.channel,"Incorect usage",colourWarn,`Please do ${prefix}points give <user> <amount>`)
@@ -191,28 +168,28 @@ exports.run = function(message, prefix, args) {
         }else{
             functions.embed(message.channel,"Incorect usage",colourWarn,`Please do ${prefix}points give <user> <amount>`)
         }
+        }else{
+            functions.embed(message.channel,"Incorect usage",colourWarn,`Please do ${prefix}points give <user> <amount>`)
+        }
     }else if(args[1] == "info"){
         let info =
-        `Time between points: ${config.generalConfigPoints.timeBetweenMessages}\n`
-        +`Tick-Rate: ${config.generalConfigPoints.tickRate}\n`
+        `Time between points: ${config.generalConfigPoints.timeBetweenMessages}`
         functions.embed(message.channel, "Info:",colourInfo,info);
     }else if(args[1] == "help"){
         functions.embed(message.channel,"Help",colourInfo,usage);
     }else{
-        let user;
-        for (let i = 0; i < tableTickets.length; i++) {
-        if (tableTickets[i].tag == message.author.tag) {
-            user = tableTickets[i];
+        if(args.length < 2){
+        functions.embed(message.channel, "Points", colourGold, `${message.author.tag} has ${functions.pointManager("fetch",0,message.author.id,message.author.tag)} points`);
+        }else{
+            try {
+                var user = message.mentions.users.first().id
+                var userTag = message.mentions.users.first().tag
+                functions.embed(message.channel, "Points", colourGold, `${userTag} has ${functions.pointManager("fetch",0,user,userTag)} points`)
+            } catch (error) {
+                functions.embed(message.channel,"Incorect usage",colourWarn,`Please do ${prefix}points [user]`)
+            }
         }
     }
-
-        if (user == null) {
-            user = {
-                "tag": message.author.tag,
-                "points": 0
-            };
-        }
-    
-        functions.embed(message.channel, "", colourGold, `${message.author.tag} has ${user.points} points`);
     }
-    }
+}
+}
