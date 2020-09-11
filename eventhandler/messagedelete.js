@@ -15,7 +15,8 @@ module.exports = {
                 .setColor(colourInfo)
                 .addField("User", `${message.author} \`${message.author.tag}\``)
                 .addField("Channel", message.channel)
-                .addField("Content", `\`\`\`${message.content}\`\`\``);
+                .addField("Content", `\`\`\`${message.content}\`\`\``)
+                .setThumbnail(message.author.displayAvatarURL);
                 
             message.guild.channels.find(channel => channel.name == config.channels.logging).send(embed);
         });
