@@ -14,8 +14,8 @@ module.exports = {
                 .setTitle("Message Deleted")
                 .setColor(colourInfo)
                 .addField("User", `${message.author} \`${message.author.tag}\``)
-                .addField("Content", `${message.content}`)
-                .addField("Channel", message.channel);
+                .addField("Channel", message.channel)
+                .addField("Content", `\`\`\`${message.content}\`\`\``);
                 
             message.guild.channels.find(channel => channel.name == config.channels.logging).send(embed);
         });
