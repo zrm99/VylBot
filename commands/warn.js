@@ -31,10 +31,28 @@ module.exports = {
 								.setDescription(`For the reason: ${reason}`);
 						member.send(embed).then(()=>{
 							functions.embed(message.channel, "", colourInfo, user.tag + " has been warned");
-							functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Warned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+							
+							let embed = new discord.RichEmbed()
+								.setTitle("Member Warned")
+								.setColor(colourInfo)
+								.addField("User", `${user} \`${user.tag}\``)
+								.addField("Moderator", `${message.author} \`${message.author.tag}\``)
+								.addField("Reason", reason || "*none*")
+								.setThumbnail(user.displayAvatarURL);
+								
+							message.guild.channels.find(channel => channel.name == config.channels.logging).send(embed);
 						}).catch(() => {
 							functions.embed(message.channel, "", colourInfo, user.tag + " has been warned");
-							functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Warned", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag);
+							
+							let embed = new discord.RichEmbed()
+								.setTitle("Member Warned")
+								.setColor(colourInfo)
+								.addField("User", `${user} \`${user.tag}\``)
+								.addField("Moderator", `${message.author} \`${message.author.tag}\``)
+								.addField("Reason", reason || "*none*")
+								.setThumbnail(user.displayAvatarURL);
+								
+							message.guild.channels.find(channel => channel.name == config.channels.logging).send(embed);
 						});
 					}
 				} else {
