@@ -4,13 +4,14 @@ const discord = require('discord.js');
 
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
+var colourMember = config.messageColours.member;
 
 module.exports = {
     run: function(client) {
         client.on('guildMemberRemove', (member) => {
             var embed = new discord.RichEmbed()
                 .setTitle("Member Left")
-                .setColor(colourInfo)
+                .setColor(colourMember)
                 .addField("User", `${member} \`${member.user.tag}\``)
                 .addField("Joined", `${member.joinedAt}`)
                 .setFooter(`User ID: ${member.user.id}`)

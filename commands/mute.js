@@ -4,6 +4,7 @@ const discord = require('discord.js');
 
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
+var colourMod = config.messageColours.mod;
 
 module.exports = {
 	name: 'mute',
@@ -36,7 +37,7 @@ module.exports = {
 								
 								let embed = new discord.RichEmbed()
 									.setTitle("Member Muted")
-									.setColor(colourInfo)
+									.setColor(colourMod)
 									.addField("User", `${user} \`${user.tag}\``)
 									.addField("Moderator", `${message.author} \`${message.author.tag}\``)
 									.addField("Reason", reason || "*none*")
@@ -47,8 +48,8 @@ module.exports = {
 								functions.embed(message.channel, "", colourInfo, user.tag + " has been muted");
 								
 								let embed = new discord.RichEmbed()
-									.setTitle("Member Banned")
-									.setColor(colourInfo)
+									.setTitle("Member Muted")
+									.setColor(colourMod)
 									.addField("User", `${user} \`${user.tag}\``)
 									.addField("Moderator", `${message.author} \`${message.author.tag}\``)
 									.addField("Reason", reason || "*none*")

@@ -4,6 +4,7 @@ const discord = require('discord.js');
 
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
+var colourMod = config.messageColours.mod;
 
 module.exports = {
 	name: 'ban',
@@ -34,7 +35,7 @@ module.exports = {
 								
 								let embed = new discord.RichEmbed()
 									.setTitle("Member Banned")
-									.setColor(colourInfo)
+									.setColor(colourMod)
 									.addField("User", `${user} \`${user.tag}\``)
 									.addField("Moderator", `${message.author} \`${message.author.tag}\``)
 									.addField("Reason", reason || "*none*")
@@ -50,7 +51,7 @@ module.exports = {
 
 								let embed = new discord.RichEmbed()
 									.setTitle("Member Banned")
-									.setColor(colourInfo)
+									.setColor(colourMod)
 									.addField("User", `${user} \`${user.tag}\``)
 									.addField("Moderator", `${message.author} \`${message.author.tag}\``)
 									.addField("Reason", reason || "*none*")
