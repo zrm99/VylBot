@@ -37,5 +37,23 @@
     "messageColours": {
     	"info": "0x0754c6",
     	"warn": "0xe02702"
-    }
+    },
+    "commandsWithCost": [
+        {"name": "help", "cost": 10},
+        {"name": "role", "cost": 0}
+    ],
+    "generalConfigPoints":{
+        "timeBetweenMessages": 30,
+        "randomTimeMessage": true,
+        "announcePoints": true,
+        "randomModifier": 25,
+        "maximumEntriesPerPage":5,
+        "superSecretSetting": true
+    },
+    "debugFunctions":[
+        "pointManager",
+        "itemManager",
+        "commandCost",
+        "pointBanned"
+    ]
 }
