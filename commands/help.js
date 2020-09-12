@@ -23,18 +23,18 @@ module.exports = {
 				.setDescription("");
 	
 			for (let i = 0; i < categories.length; i++) {
-				var categoryText = "";
+				var categoryArray = [];
 				var categoryName = categories[i].charAt(0).toUpperCase() + categories[i].substring(1);
 	
 				for (let j = 0; j < files.length; j++) {
 					var file = require(`./${files[j]}`);
 	
 					if (file.category == categories[i]) {
-						categoryText += `\`${file.name}\`, `;
+						categoryArray.push(`\`${file.name}\``);
 					}
 				}
 
-				if (categoryText != "") embed.addField(categoryName, categoryText);
+				embed.addField(categoryName, categoryArray.join(", "));
 			}
 			
 			message.channel.send(embed);
@@ -53,7 +53,15 @@ module.exports = {
 					cmdCategory = cmdCategory.charAt(0).toUpperCase() + cmdCategory.slice(1);
 					cmdRoles = cmdRoles.charAt(0).toUpperCase() + cmdRoles.slice(1);
 
-					functions.embed(message.channel, cmdName, colourInfo, `Description: ${cmdDesc}\nCategory: ${cmdCategory}\nUsage: ${cmdUsage}\nRoles: ${cmdRoles}`);
+					let embed = new discord.RichEmbed()
+						.setTitle(cmdName)
+						.setColor(colourInfo)
+						.addField("Description", cmdDesc || "*none*")
+						.addField("Category", cmdCategory || "*none*")
+						.addField("Usage", cmdUsage || "*none*")
+						.addField("Roles", cmdRoles || "*none*");
+						
+					message.channel.send(embed);
 				} else if (err.code === 'ENOENT') {
 					functions.embed(message.channel, "", colourWarn, "Specified command does not exist");
 				} else {
