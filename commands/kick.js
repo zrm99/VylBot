@@ -38,7 +38,7 @@ module.exports = {
 								.setColor(colourInfo)
 								.addField("User", `${user} \`${user.tag}\``)
 								.addField("Moderator", `${message.author} \`${message.author.tag}\``)
-								.addField("Reason", reason)
+								.addField("Reason", reason || "*none*")
 								.setThumbnail(user.displayAvatarURL);
 								
 							message.guild.channels.find(channel => channel.name == config.channels.logging).send(embed);
