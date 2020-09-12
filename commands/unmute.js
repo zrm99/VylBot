@@ -1,5 +1,6 @@
 const config = require('../config.json');
 const functions = require('../functions.js');
+const discord = require('discord.js');
 
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
@@ -22,7 +23,15 @@ module.exports = {
 					
 					member.removeRole(mutedRole).then(() => {
 						functions.embed(message.channel, "", colourInfo, user.tag + " has been unmuted");
-						functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Unmuted", colourInfo, "Member: " + user.tag + "\n Moderator: " + message.author.tag)
+						
+						let embed = new discord.RichEmbed()
+							.setTitle("Member Unmuted")
+							.setColor(colourInfo)
+							.addField("User", `${user} \`${user.tag}\``)
+							.addField("Moderator", `${message.author} \`${message.author.tag}\``)
+							.setThumbnail(user.displayAvatarURL);
+									
+						message.guild.channels.find(channel => channel.name == config.channels.logging).send(embed);
 					}).catch(err => {
 						functions.embed(message.channel, "", colourWarn, "There was an error unmuting this user, maybe I'm missing permissions?");
 						console.log(err);
