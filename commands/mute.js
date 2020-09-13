@@ -4,6 +4,7 @@ const discord = require('discord.js');
 
 var colourInfo = config.messageColours.info;
 var colourWarn = config.messageColours.warn;
+var colourMod = config.messageColours.mod;
 
 module.exports = {
 	name: 'mute',
@@ -33,10 +34,28 @@ module.exports = {
 						member.addRole(mutedRole).then(() => {
 							member.send(embed).then(()=>{
 								functions.embed(message.channel, "", colourInfo, user.tag + " has been muted");
-								functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Muted", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag)
+								
+								let embed = new discord.RichEmbed()
+									.setTitle("Member Muted")
+									.setColor(colourMod)
+									.addField("User", `${user} \`${user.tag}\``)
+									.addField("Moderator", `${message.author} \`${message.author.tag}\``)
+									.addField("Reason", reason || "*none*")
+									.setThumbnail(user.displayAvatarURL);
+									
+								message.guild.channels.find(channel => channel.name == config.channels.logging).send(embed);
 							}).catch(() => {
 								functions.embed(message.channel, "", colourInfo, user.tag + " has been muted");
-								functions.embed(message.guild.channels.find(channel => channel.name == config.channels.logging), "Member Muted", colourInfo, "Member: " + user.tag + "\n Reason: " + reason + "\n Moderator: " + message.author.tag)
+								
+								let embed = new discord.RichEmbed()
+									.setTitle("Member Muted")
+									.setColor(colourMod)
+									.addField("User", `${user} \`${user.tag}\``)
+									.addField("Moderator", `${message.author} \`${message.author.tag}\``)
+									.addField("Reason", reason || "*none*")
+									.setThumbnail(user.displayAvatarURL);
+									
+								message.guild.channels.find(channel => channel.name == config.channels.logging).send(embed);
 							});
 						}).catch(err => {
 							functions.embed(message.channel, "", colourWarn, "There was an error muting this user, maybe I'm missing permissions?");
