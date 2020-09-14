@@ -6,8 +6,7 @@
     "info": {
     	"version": "",
     	"author": "",
-    	"date": "",
-    	"devBuild": false
+    	"date": ""
     },
     "prefix": {
     	"live": "v!",
@@ -19,16 +18,19 @@
         ],
         "categories": [
             "general",
-            "moderation"
+            "moderation",
+            "owner"
         ]
     },
     "channels": {
-        "logging": "logs"
+        "logging": "logs",
+        "rules": "rules"
     },
     "roles": {
         "moderator": "Moderator",
         "admin": "Admin",
-        "muted": "Muted"
+        "muted": "Muted",
+        "owner": "Owner"
     },
     "assignableRoles": [
     	"Notify",
@@ -36,6 +38,8 @@
     ],
     "messageColours": {
     	"info": "0x0754c6",
-    	"warn": "0xe02702"
+    	"warn": "0xe02702",
+        "mod": "0xeb9b34",
+        "member": "0x923afc"
     }
 }

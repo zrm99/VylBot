@@ -21,7 +21,7 @@ module.exports = {
             args = argsJoined.split(';');
     
             //checks for length
-            if(args.length >= 3 && args.length < 10){
+            if(args.length >= 3 && args.length < 11){
                 //putting the options into a var to use later
                 var title = args[0];
                 var optionOne = args[1];
@@ -116,7 +116,7 @@ module.exports = {
     
                 // Delete the initial message
                 message.delete();
-            } else if (args.length >= 10) {
+            } else if (args.length >= 11) {
                 functions.embed(message.channel, "", colourWarn, "The poll command can only accept up to 9 options");
             } else {
                 //sends a message for all the people not knowing how to make a poll... Idiots...
