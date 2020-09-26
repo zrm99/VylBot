@@ -13,11 +13,13 @@
     	"dev": "d!"
     },
     "commands": {
+        "bunnyImage": true,
         "disabled": [
             
         ],
         "categories": [
             "general",
+            "fun",
             "moderation",
             "owner"
         ]
