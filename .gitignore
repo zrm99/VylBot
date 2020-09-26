@@ -1,6 +1,6 @@
 config.json
 .DS_Store
-node_modules
 rules.txt
+node_modules
 .vscode
 npm-debug.log
